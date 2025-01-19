@@ -55,12 +55,8 @@ if st.button("Send") and user_input:
     # Add user message to session state
     st.session_state["messages"].append({"role": "user", "content": user_input})
 
-
-
     # Query Azure OpenAI
     assistant_reply = query_openai(st.session_state["messages"])
-
-    
 
     # Add assistant message to session state
     st.session_state["messages"].append({"role": "assistant", "content": assistant_reply})
@@ -79,3 +75,4 @@ if st.button("Clear Chat"):
     st.session_state["messages"] = [
         {"role": "system", "content": "You are a helpful assistant."}
     ]
+
