@@ -4,6 +4,8 @@ import streamlit as st
 import openai
 import logging as log
 import uuid
+import loadprops
+
 from PyPDF2 import PdfReader
 from docx import Document
 from azure.search.documents import SearchClient
@@ -11,7 +13,6 @@ from azure.search.documents.indexes import SearchIndexClient
 from azure.search.documents.indexes.models import SearchIndex, SimpleField, SearchableField
 from azure.core.exceptions import ResourceNotFoundError
 from azure.core.credentials import AzureKeyCredential
-
 
 
 # Load variables from .env file
@@ -33,9 +34,6 @@ azure_ai_search_index_name = os.getenv("AZURE_AI_SEARCH_INDEX_NAME")
 azure_ai_search_api_key = AzureKeyCredential(os.getenv("AZURE_AI_SEARCH_API_KEY"))
 
 search_client = SearchClient(endpoint=azure_ai_search_service_endpoint, index_name=azure_ai_search_index_name, credential=azure_ai_search_api_key)
-
-
-
 
 # Streamlit app configuration
 st.title("AI Chatbot with Azure OpenAI and Azure Search")
@@ -93,7 +91,7 @@ def create_index_if_not_exists():
         print(f"Index '{azure_ai_search_index_name}' created successfully.")
 
 
-
+# upload document
 def upload_document(content, doc_id):
 
     create_index_if_not_exists()
@@ -102,12 +100,12 @@ def upload_document(content, doc_id):
     search_client.upload_documents(documents=[document])
     print(f"document wiuth id {doc_id} uploaded successfully")
 
-
-def search_documents(query):
-    
+# search documents based on query
+def search_documents(query):    
     results = search_client.search(query)
     return "\n".join([doc["content"] for doc in results])
 
+# answer user query based on documents uploaded by user
 def answer_query(user_query):
     retrieved_docs = search_documents(user_query)
     response = openai.chat.completions.create(
