@@ -12,7 +12,7 @@ AZURE_OPENAI_ENDPOINT = os.getenv("OPEN_AI_API_ENDPOINT_CHAT")
 AZURE_OPENAI_API_KEY = os.getenv("OPEN_AI_API_KEY_CHAT")
 AZURE_OPENAI_API_VERSION = os.getenv("OPEN_AI_API_VERSION_CHAT") 
 
-# set environment as LiteLLM expects
+# set environment as LiteLLM expects (convenience mapping of my standard env vars to LiteLLM's)
 os.environ['AZURE_API_KEY'] = AZURE_OPENAI_API_KEY
 os.environ["AZURE_API_BASE"] = AZURE_OPENAI_ENDPOINT
 os.environ["AZURE_API_VERSION"] = AZURE_OPENAI_API_VERSION
