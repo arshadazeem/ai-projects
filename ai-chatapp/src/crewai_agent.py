@@ -32,7 +32,7 @@ client = Agent(
 advisor = Agent(
     name="Financial Advisor",
     role="Investment Expert",
-    goal="Provide multiple short-term investment strategies that balance risk and returns.",
+    goal="Provide multiple short-term investment strategies that balance risk and returns. Recommend high yield assets, ETFs or specific stock mix that will help the investor outperform the S&P 500.",
     backstory="An experienced financial strategist focused on short-term market trends, sector rotations, and high-yield opportunities.",
     verbose=True,
     llm=LLM(model='azure/gpt-4o')

@@ -1,0 +1,20 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "Create Spring Boot Project",
+			"command": "mvn",
+			"args": [
+				"archetype:generate",
+				"-DgroupId=com.example",
+				"-DartifactId=websocket-demo",
+				"-Dversion=1.0-SNAPSHOT",
+				"-DinteractiveMode=false",
+				"-DarchetypeArtifactId=maven-archetype-quickstart"
+			],
+			"problemMatcher": [],
+			"isBackground": false
+		}
+	]
+}
